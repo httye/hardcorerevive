@@ -1,0 +1,76 @@
+╔════════════════════════════╗
+║     HardcoreRevive - GitHub 快速推送指南     ║
+╚════════════════════════════════╝
+
+📝 准备工作
+━━━━━━━━
+
+1. 访问 https://github.com/new 创建新仓库
+   • 名称: HardcoreRevive
+   • 不要初始化 README/License（已有）
+   • 记下你的用户名
+
+🚀 推送方法
+━━━━━━━━
+
+方法1️⃣: 使用自动脚本（最简单）
+────────────────────────────────
+Linux/Mac:
+  ./push_to_github.sh YOUR_USERNAME
+
+Windows:
+  push_to_github.bat YOUR_USERNAME
+
+方法2️⃣: 手动命令
+─────────────────────────────
+cd /sdcard/project/HardcoreRevive
+
+# 添加远程仓库（替换YOUR_USERNAME）
+git remote add origin https://github.com/YOUR_USERNAME/HardcoreRevive.git
+
+# 推送
+git push -u origin master
+
+🔐 如果需要认证
+━━━━━━━━
+
+GitHub不再支持密码，需要 Personal Access Token:
+
+1. GitHub → Settings → Developer settings
+   → Personal access tokens → Tokens (classic)
+   
+2. Generate new token (classic)
+
+3. 勾选 "repo" 权限
+
+4. 生成并复制 token
+
+5. 推送时用户名输入GitHub用户名
+   密码输入刚才复制的 token
+
+📦 下载编译好的JAR
+━━━━━━━━
+
+推送后等待2-3分钟：
+
+1. https://github.com/YOUR_USERNAME/HardcoreRevive
+2. 点击 "Actions" 标签
+3. 选择最新的构建
+4. 向下滚动到 "Artifacts"
+5. 点击下载 "HardcoreRevive-Plugin"
+
+🎯 验证推送成功
+━━━━━━━━
+
+✅ GitHub页面显示所有文件
+✅ README正常显示
+✅ Actions标签显示构建任务
+✅ 几分钟后出现绿色✓（编译成功）
+
+📖 详细文档
+━━━━━━━━
+
+GITHUB_PUSH.md  - 完整推送指南
+README.md       - 插件使用文档
+
+════════════════════════════════

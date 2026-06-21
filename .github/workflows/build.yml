@@ -1,0 +1,42 @@
+name: Build HardcoreRevive
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+        
+    - name: Build with Maven
+      run: mvn clean package --batch-mode
+      
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: HardcoreRevive
+        path: target/HardcoreRevive-*.jar
+        
+    - name: Create Release
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: v1.0.0-build-${{ github.run_number }}
+        name: HardcoreRevive v1.0.0 Build ${{ github.run_number }}
+        files: target/HardcoreRevive-*.jar
+        draft: false
+        prerelease: falsenv:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
