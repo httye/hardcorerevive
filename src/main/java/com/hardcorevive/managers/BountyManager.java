@@ -23,7 +23,7 @@ public class BountyManager {
         }
     }
 
-    public int createBounty(UUUID creatorUuid, String description, String rewardCode) {
+    public int createBounty(UUID creatorUuid, String description, String rewardCode) {
         return dbExt.createBounty(creatorUuid, description, rewardCode);
     }
 

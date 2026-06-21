@@ -94,10 +94,10 @@ public class HardcoreRevivePlugin extends JavaPlugin {
             escapeCheckInterval);
         
         // 定时发放复活码任务
-        long autoGrantInterval = getConfig().getLong("revive_code.auto_grant_interval", 60) * 60* 20L;
+        long autoGrantInterval = getConfig().getLong("revive_code.auto_grant_interval", 60) * 60 * 20L;
         getServer().getScheduler().runTaskTimer(this, 
             () -> reviveCodeManager.autoGrantCodes(), 
-            autoGrantInterval);
+            autoGrantInterval,autoGrantInterval);
         
         // 计分板更新任务
         if (getConfig().getBoolean("scoreboard.enabled", true)) {
