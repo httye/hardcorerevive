@@ -47,7 +47,7 @@ public class ReviveCodeManager {
     private String generateRandomCode(int length) {
         StringBuilder code = new StringBuilder(length);
         for (int i = 0; i < length; i++) {
-            code.append(CHARACTERS.charAt(random.nextInt(CHARACTERS.length()));
+            code.append(CHARACTERS.charAt(random.nextInt(CHARACTERS.length())));
         }
         return code.toString();
     }

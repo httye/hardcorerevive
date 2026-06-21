@@ -105,7 +105,7 @@ public class DatabaseManager {
             "claimer_uuid VARCHAR(36)," +
             "created_at BIGINT NOT NULL," +
             "claimed_at BIGINT DEFAULT 0" +
-            ");
+            ")");
         
         stmt.execute("CREATE TABLE IF NOT EXISTS invitations (" +
             "inviter_uuid VARCHAR(36) NOT NULL," +
@@ -224,6 +224,7 @@ public class DatabaseManager {
                 if (data != null) {
                     players.add(data);
                 }
+            }
             
             rs.close();
             stmt.close();
@@ -238,7 +239,7 @@ public class DatabaseManager {
             PreparedStatement stmt = connection.prepareStatement(
                 "REPLACE INTO revive_codes " +
                 "(code, owner_uuid, bound_player_uuid, used, created_at, expiry_time) " +
-                "VALUES (?, ?, ?, ?, ?)"
+                "VALUES (?, ?, ?, ?, ?, ?)"
             );
             
             stmt.setString(1, code.getCode());

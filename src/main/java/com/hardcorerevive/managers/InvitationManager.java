@@ -53,6 +53,7 @@ public class InvitationManager {
                 for (ReviveCode code : codes) {
                                 inviter.sendMessage("§e复活码: §f" + code.getCode());
                             }
+                        }
                         dbExt.markInvitationRewarded(invitedUuid);
                     }
                 }
