@@ -39,7 +39,7 @@ public class ScoreboardManager {
         
         Objective objective = scoreboard.getObjective("hcrevive");
         if (objective == null) {
-            objective = scoreboard.registerNewObjective("hcrevive", "dummy", "§6§l硬核复活");
+            objective = scoreboard.registerNewObjective("hcrevive", "dummy", "§c§lDeath-banned");
             objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         }
         
@@ -54,14 +54,8 @@ public class ScoreboardManager {
             }
         }
         clearScores(objective);
-        objective.getScore("§e存活: §a" + aliveCount).setScore(5);
-        objective.getScore("§e死亡: §c" + deadCount).setScore(4);
-        objective.getScore("§r").setScore(3);
-        if (revivesLeft >= 0) {
-            objective.getScore("§e剩余复活: §f" + revivesLeft).setScore(2);
-        } else {
-            objective.getScore("§e剩余复活: §f∞").setScore(2);
-        }
+        objective.getScore("§e存活: §a" + aliveCount).setScore(3);
+        objective.getScore("§e死亡: §c" + deadCount).setScore(2);
         
         if (data != null && !data.isJailed()) {
             long survivalTime = data.getSurvivalTime() / 1000;

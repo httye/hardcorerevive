@@ -175,7 +175,7 @@ public class DatabaseManager {
                 "REPLACE INTO player_data " +
                 "(uuid, player_name, is_jailed, death_count, revive_count, last_revive_time, last_sos_time, " +
                 "death_world, death_x, death_y, death_z, death_yaw, death_pitch, death_level, survival_start_time) " +
-                "VALUES (?, ?, ?, ?, )"
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
             );
             
             stmt.setString(1, data.getUuid().toString());
