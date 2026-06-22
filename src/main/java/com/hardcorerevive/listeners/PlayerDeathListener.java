@@ -2,8 +2,6 @@ package com.hardcorerevive.listeners;
 
 import com.hardcorerevive.HardcoreRevivePlugin;
 import com.hardcorerevive.models.PlayerData;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -17,36 +15,30 @@ public class PlayerDeathListener implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerDeath(PlayerDeathEvent event) {
         Player player = event.getEntity();
-        PlayerData data = plugin.getPlayerDataManager().getOrCreatePlayerData(player);
         
-        data.incrementDeathCount();
-        
-        Location deathLoc = player.getLocation();
-        boolean hideCoords = plugin.getConfig().getBoolean("announcements.hide_death_coords", false);
-        String deathMessage;
-        if (hideCoords) {
-            deathMessage = "§c" + player.getName() + " 已死亡！";
-        } else {
-            deathMessage = "§c" + player.getName() + " 在 " + 
-                String.format("%.0f, %.0f, %.0f", deathLoc.getX(), deathLoc.getY(), deathLoc.getZ()) + 
-                " 死亡！";
+        // 获取或创建玩家数据
+        PlayerData data = plugin.getPlayerDataManager().getPlayerData(player.getUniqueId());
+        if (data == null) {
+            data = new PlayerData(player.getUniqueId(), player.getName());
         }
         
-        Bukkit.broadcastMessage(deathMessage);
+        // 更新死亡信息
+        data.setDeathCount(data.getDeathCount() + 1);
+        data.setDeathLocation(player.getLocation());
+        data.setDeathLevel(player.getLevel());
         
-        if (plugin.getConfig().getBoolean("announcements.death_titlenabled", true)) {
-            for (Player p : Bukkit.getOnlinePlayers()) {
-                p.sendTitle("§4☠", "§c" + player.getName() + " 已死亡", 10, 40, 10);
-            }
+        // 保存数据
+        plugin.getPlayerDataManager().savePlayerData(data);
+        
+        // 生成墓碑
+        if (plugin.getConfig().getBoolean("tombstone.enabled", true)) {
+            plugin.getTombstoneManager().createTombstone(player, player.getLocation());
         }
-        plugin.getTombstoneManager().createTombstone(player.getUniqueId(), player.getName(), deathLoc);
-        Bukkit.getScheduler().runTaskLater(plugin, () -> {
-            if (player.isOnline()) {
-                plugin.getJailManager().jailPlayer(player, deathLoc);
-            }
-        }, 1L);
+        
+        // 更新计分板
+        plugin.getScoreboardManager().updateAllScoreboards();
     }
 }

@@ -14,6 +14,10 @@ public class PlayerQuitListener implements Listener {
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
-        plugin.getPlayerDataManager().unloadPlayerData(event.getPlayer().getUniqueId());
+        // 卸载玩家数据缓存
+        plugin.getPlayerDataManager().unloadPlayer(event.getPlayer().getUniqueId());
+        
+        // 更新计分板
+        plugin.getScoreboardManager().updateAllScoreboards();
     }
 }

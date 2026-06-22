@@ -1,90 +1,16 @@
-# HardcoreRevive 配置文件
-
-# 小黑屋设置
-jail:
-  # 是否自动生成基岩+铁栅栏牢笼
-  auto_generate_cage: true
-  # 牢笼大小（半径）
-  cage_radius: 3
-  # 越狱检测间隔（秒）
-  escape_check_interval: 10
-  # 逃脱判定距离（方块）
-  escape_distance: 15
-
-# 复活码设置
-revive_code:
-  # 复活码长度
-  code_length: 8
-  # 复活码有效期（小时，0为永久）
-  expiry_hours: 168
-  # 定时发放间隔（分钟）
-  auto_grant_interval: 60
-  # 定时发放是否仅限存活玩家
-  auto_grant_alive_only: true
-  # 定时发放数量
-  auto_grant_amount: 1
-
-# 复活限制
-revive_limits:
-  # 终身复活次数上限（0为无限）
-  max_revives: 0
-  # 是否启用递增消耗（第N次复活消耗N个码）
-  progressive_cost: true
-  # 复活冷却时间（分钟）
-  cooldown_minutes: 30
-  # 经验惩罚百分比（扣除死亡时等级的百分比）
-  exp_penalty_percent: 20
-
-# 邀请奖励
-invitation:
-  # 新玩家需游玩的时间（分钟）
-  required_playtime: 30
-  # 奖励复活码数量
-  reward_amount: 2
-
-# 社交系统
-social:
-  # SOS冷却时间（分钟）
-  sos_cooldown: 10
-  # 信任列表最大人数
-  max_trust_list: 10
-
-# 墓碑设置
-tombstone:
-  # 是否启用墓碑
-  enabled: true
-  # 墓碑持续时间（秒，-1为永久）
-  duration: -1
-
-# 公告设置
-announcements:
-  # 死亡公告是否隐藏坐标
-  hide_death_coords: false
-  # 是否启用死亡Title特效
-  death_title_enabled: true
-  # 是否启用复活Title特效
-  revive_title_enabled: true
-
-# 计分板设置
-scoreboard:
-  # 是否启用计分板
-  enabled: true
-  # 更新间隔（秒）
-  update_interval: 5
+# Death-banned 配置文件
 
 # 数据库设置
 database:
-  # 数据库类型（sqlite/mysql）
-  type: sqlite
-  # SQLite数据库文件路径
-  sqlite_path: plugins/HardcoreRevive/data.db
-  # MySQL设置（如使用MySQL需配置）
-  mysql:
-    host: localhost
-    port: 3306
-    database: hardcorerevive
-    username: root
-    password: password
+  path: "plugins/HardcoreRevive/data.db"
 
-# 调试模式
-debug: false
+# 计分板设置
+scoreboard:
+  enabled: true
+  update_interval: 5 # 更新间隔（秒）
+
+# 墓碑设置
+tombstone:
+  enabled: true
+  # 墓碑保留时间（秒），0表示永久
+  duration: 0
